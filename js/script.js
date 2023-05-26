@@ -27,18 +27,24 @@ function deleteGrid() {
     }
 }
 
+let color = 'black';
 let click;
 function squareDragEvent(element) {
     element.addEventListener('mousedown', () => {
         click = true;
-        element.style.backgroundColor = 'black';
+        element.style.backgroundColor = color;
     })
     element.addEventListener('mouseover', () => {
         if (click) {
-            element.style.backgroundColor = 'black';
+            element.style.backgroundColor = color;
         }
     })
     element.addEventListener('mouseup', () => {
         click = false;
     })
+}
+
+let colorSelector = document.getElementById('color-selector');
+function colorPicker() {
+    color = colorSelector.value;
 }
