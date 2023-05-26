@@ -1,0 +1,41 @@
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    display: flex;
+    background-color: blue;
+    height: 480px;
+    width: 480px;
+    min-height: 480px;
+    min-width: 480px;
+    border-style: solid;
+    border-color: black;
+    border-width: 1px;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    flex: 1;;
+    background-color: red;
+}
+
+.square {
+    flex: 1;
+    background-color: white;
+    border-style: solid;
+    border-color: black;
+    border-width: 1px;
+}
+
+.side-bar {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
