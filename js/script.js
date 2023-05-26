@@ -21,7 +21,6 @@ createGrid(defaultSize);
 
 //Sidebar actions
 colorSelector.setAttribute('oninput', 'colorPicker()');
-colorFinder.setAttribute('value', '#ffffff');
 colorFinder.addEventListener('click', () => {
     if (find) {
         find = false;
@@ -75,25 +74,26 @@ function deleteGrid() {
 //Color and draw functions
 function squareDragEvent(element) {
     element.addEventListener('mousedown', () => {
-        click = true;
-        if (rainbow) {
-            element.style.backgroundColor = rainbowColor();
+        if (!find) {
+            click = true;
         }
-        else {
-            element.style.backgroundColor = color;
-        }
+        colorOptions(element);
     })
     element.addEventListener('mouseover', () => {
-        if (click && rainbow) {
-            element.style.backgroundColor = rainbowColor();
-        }
-        else if (click) {
-            element.style.backgroundColor = color;
-        }
+        colorOptions(element);
     })
     element.addEventListener('mouseup', () => {
         click = false;
     })
+}
+
+function colorOptions(element) {
+    if (click && rainbow) {
+        element.style.backgroundColor = rainbowColor();
+    }
+    else if (click) {
+        element.style.backgroundColor = color;
+    }
 }
 
 function colorPicker() {
