@@ -1,19 +1,24 @@
 const container = document.querySelector('.container');
 
 let userInput = 100;
-for (let i = 0; i < userInput; i++) {
-    const column = document.createElement('div');
-    column.classList.add('column');
 
-    for (let j = 0; j < userInput; j++) {
-        const square = document.createElement('div');
-        square.classList.add('square');
-        squareDragEvent(square);
-        column.appendChild(square);
+function createGrid() {
+    for (let i = 0; i < userInput; i++) {
+        const column = document.createElement('div');
+        column.classList.add('column');
+
+        for (let j = 0; j < userInput; j++) {
+            const square = document.createElement('div');
+            square.classList.add('square');
+            squareDragEvent(square);
+            column.appendChild(square);
+        }
+        
+        container.appendChild(column);
     }
-
-    container.appendChild(column);
 }
+
+createGrid();
 
 let click;
 function squareDragEvent(element) {
