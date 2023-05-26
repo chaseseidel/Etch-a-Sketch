@@ -1,24 +1,31 @@
 const container = document.querySelector('.container');
 
-let userInput = 100;
-
-function createGrid() {
-    for (let i = 0; i < userInput; i++) {
+function createGrid(input) {
+    for (let i = 0; i < input; i++) {
         const column = document.createElement('div');
         column.classList.add('column');
 
-        for (let j = 0; j < userInput; j++) {
+        for (let j = 0; j < input; j++) {
             const square = document.createElement('div');
             square.classList.add('square');
             squareDragEvent(square);
             column.appendChild(square);
         }
-        
+
         container.appendChild(column);
     }
 }
 
-createGrid();
+function changeSize(value) {
+    deleteGrid();
+    createGrid(value);
+}
+
+function deleteGrid() {
+    while (container.firstChild) {
+        container.removeChild(container.firstChild);
+    }
+}
 
 let click;
 function squareDragEvent(element) {
