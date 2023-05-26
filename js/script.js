@@ -35,6 +35,7 @@ rainbowButton.addEventListener('click', () => {
     }
     else {
         rainbow = true;
+        find = false;
     }
 });
 resetButton.addEventListener('click', resetGrid);
@@ -50,6 +51,7 @@ function createGrid(input) {
         for (let j = 0; j < input; j++) {
             const square = document.createElement('div');
             square.classList.add('square');
+            square.style.backgroundColor = 'rgb(255, 255, 255)';
             squareDragEvent(square);
             column.appendChild(square);
         }
@@ -77,6 +79,10 @@ function squareDragEvent(element) {
         if (!find) {
             click = true;
         }
+        else {
+            rainbow = false;
+            findColor(element);
+        }
         colorOptions(element);
     })
     element.addEventListener('mouseover', () => {
@@ -92,7 +98,7 @@ function colorOptions(element) {
         element.style.backgroundColor = rainbowColor();
     }
     else if (click) {
-        element.style.backgroundColor = color;
+        element.style.backgroundColor = colorSelector.value;
     }
 }
 
@@ -108,9 +114,30 @@ function rainbowColor() {
     return `rgb(${r}, ${g}, ${b})`;
 }
 
+function valueToHex(colorVal) {
+    colorVal = colorVal.toString(16);
+    if (colorVal.length == 1) {
+        colorVal = '0' + colorVal;
+    }
+    return colorVal;
+}
+
+function RGBToHex(r, g ,b) {
+    return '#' + `${valueToHex(r)}` + `${valueToHex(g)}` + `${valueToHex(b)}`;
+}
+
 //Sidebar Functions
+function findColor(element) {
+    let rgb = element.style.backgroundColor;
+    rgb = rgb.substring(4, rgb.length - 1).replace(/, /g, ',').split(',');
+    let r = valueToHex(Number(rgb[0]));
+    let g = valueToHex(Number(rgb[1]));
+    let b = valueToHex(Number(rgb[2]));
+    let hexColor = RGBToHex(r, g, b);
+    colorSelector.value = hexColor;
+}
 
 function resetGrid() {
     const squares = container.querySelectorAll('.square');
-    squares.forEach(square => square.style.backgroundColor = 'white')
+    squares.forEach(square => square.style.backgroundColor = 'rgb(255, 255, 255)')
 }
