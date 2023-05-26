@@ -4,25 +4,43 @@ const defaultSize = document.getElementById('range').value;
 
 //Sidebar variables
 const colorSelector = document.getElementById('color-selector');
+const colorFinder = document.getElementById('color-finder');
 const rainbowButton = document.getElementById('rainbow-button');
 const resetButton = document.getElementById('reset-button');
+const sliderSize = document.getElementById('slider-size');
 const slider = document.getElementById('range');
 
 //Color and draw variables
-let rainbow = false;
-let color = colorSelector.value;
 let click = false;
+let color = colorSelector.value;
+let find = false;
+let rainbow = false;
 
 //Grid Actions
 createGrid(defaultSize);
 
 //Sidebar actions
-slider.setAttribute('oninput', 'changeSize(this.value)');
-colorSelector.setAttribute('oninput', 'colorPicker()')
+colorSelector.setAttribute('oninput', 'colorPicker()');
+colorFinder.setAttribute('value', '#ffffff');
+colorFinder.addEventListener('click', () => {
+    if (find) {
+        find = false;
+    }
+    else {
+        find = true;
+    }
+});
 rainbowButton.addEventListener('click', () => {
-    rainbow = true;
-})
+    if (rainbow) {
+        rainbow = false;
+    }
+    else {
+        rainbow = true;
+    }
+});
 resetButton.addEventListener('click', resetGrid);
+sliderSize.textContent = `${slider.value} x ${slider.value}`;
+slider.setAttribute('oninput', 'changeSize(this.value)');
 
 //Grid Functions
 function createGrid(input) {
@@ -41,9 +59,10 @@ function createGrid(input) {
     }
 }
 
-function changeSize(value) {
+function changeSize(size) {
     deleteGrid();
-    createGrid(value);
+    createGrid(size);
+    sliderSize.textContent = `${size} x ${size}`;
 }
 
 function deleteGrid() {
@@ -52,10 +71,6 @@ function deleteGrid() {
     }
 }
 
-function resetGrid() {
-    const squares = container.querySelectorAll('.square');
-    squares.forEach(square => square.style.backgroundColor = 'white')
-}
 
 //Color and draw functions
 function squareDragEvent(element) {
@@ -91,4 +106,11 @@ function rainbowColor() {
     const g = Math.floor(Math.random() * 255);
     const b = Math.floor(Math.random() * 255);
     return `rgb(${r}, ${g}, ${b})`;
+}
+
+//Sidebar Functions
+
+function resetGrid() {
+    const squares = container.querySelectorAll('.square');
+    squares.forEach(square => square.style.backgroundColor = 'white')
 }
