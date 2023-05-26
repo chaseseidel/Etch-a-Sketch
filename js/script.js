@@ -35,7 +35,10 @@ function squareDragEvent(element) {
         element.style.backgroundColor = color;
     })
     element.addEventListener('mouseover', () => {
-        if (click) {
+        if (click && rainbow) {
+            element.style.backgroundColor = rainbowColor();
+        }
+        else if (click) {
             element.style.backgroundColor = color;
         }
     })
@@ -48,3 +51,21 @@ let colorSelector = document.getElementById('color-selector');
 function colorPicker() {
     color = colorSelector.value;
 }
+
+let rainbow = false;
+function rainbowColor() {
+    const r = Math.floor(Math.random() * 255);
+    const g = Math.floor(Math.random() * 255);
+    const b = Math.floor(Math.random() * 255);
+    return `rgb(${r}, ${g}, ${b})`;
+}
+
+const rainbowButton = document.getElementById('rainbow-button');
+rainbowButton.addEventListener('click', () => {
+    if (rainbow == false) {
+        rainbow = true;
+    }
+    else {
+        rainbow = false;
+    }
+})
