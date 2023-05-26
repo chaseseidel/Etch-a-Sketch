@@ -1,12 +1,28 @@
 //Grid variables
 const container = document.querySelector('.container');
+const defaultSize = document.getElementById('range').value;
+
+//Sidebar variables
+const colorSelector = document.getElementById('color-selector');
+const rainbowButton = document.getElementById('rainbow-button');
+const resetButton = document.getElementById('reset-button');
+const slider = document.getElementById('range');
 
 //Color and draw variables
-const colorSelector = document.getElementById('color-selector');
-
 let rainbow = false;
 let color = colorSelector.value;
 let click = false;
+
+//Grid Actions
+createGrid(defaultSize);
+
+//Sidebar actions
+slider.setAttribute('oninput', 'changeSize(this.value)');
+colorSelector.setAttribute('oninput', 'colorPicker()')
+rainbowButton.addEventListener('click', () => {
+    rainbow = true;
+})
+resetButton.addEventListener('click', resetGrid);
 
 //Grid Functions
 function createGrid(input) {
