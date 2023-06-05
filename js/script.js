@@ -26,6 +26,8 @@ colorFinder.addEventListener('click', () => {
         find = false;
     }
     else {
+        toggleAll();
+        colorFinder.style.backgroundColor = 'blue';
         find = true;
     }
 });
@@ -34,8 +36,9 @@ rainbowButton.addEventListener('click', () => {
         rainbow = false;
     }
     else {
+        toggleAll();
+        rainbowButton.style.backgroundColor = 'blue';
         rainbow = true;
-        find = false;
     }
 });
 resetButton.addEventListener('click', resetGrid);
@@ -140,4 +143,11 @@ function findColor(element) {
 function resetGrid() {
     const squares = container.querySelectorAll('.square');
     squares.forEach(square => square.style.backgroundColor = 'rgb(255, 255, 255)')
+}
+
+function toggleAll() {
+    rainbow = false;
+    rainbowButton.style.backgroundColor = 'green';
+    find = false;
+    colorFinder.style.backgroundColor = 'green';
 }
