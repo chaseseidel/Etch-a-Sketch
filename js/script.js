@@ -23,21 +23,23 @@ createGrid(defaultSize);
 colorSelector.setAttribute('oninput', 'colorPicker()');
 colorFinder.addEventListener('click', () => {
     if (find) {
-        find = false;
+        toggleAll();
     }
     else {
         toggleAll();
-        colorFinder.style.backgroundColor = 'blue';
+        colorFinder.style.backgroundColor = '#5BC3EB';
+        colorFinder.style.color = '#EDE6E3';
         find = true;
     }
 });
 rainbowButton.addEventListener('click', () => {
     if (rainbow) {
-        rainbow = false;
+        toggleAll();
     }
     else {
         toggleAll();
-        rainbowButton.style.backgroundColor = 'blue';
+        rainbowButton.style.backgroundColor = '#5BC3EB';
+        rainbowButton.style.color = '#EDE6E3';
         rainbow = true;
     }
 });
@@ -143,11 +145,14 @@ function findColor(element) {
 function resetGrid() {
     const squares = container.querySelectorAll('.square');
     squares.forEach(square => square.style.backgroundColor = 'rgb(255, 255, 255)')
+    toggleAll();
 }
 
 function toggleAll() {
     rainbow = false;
-    rainbowButton.style.backgroundColor = 'green';
+    rainbowButton.style.backgroundColor = '#EDE6E3';
+    rainbowButton.style.color = '#36382E';
     find = false;
-    colorFinder.style.backgroundColor = 'green';
+    colorFinder.style.backgroundColor = '#EDE6E3';
+    colorFinder.style.color = '#36382E';
 }
